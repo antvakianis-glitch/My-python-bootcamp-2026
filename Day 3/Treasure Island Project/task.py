@@ -20,5 +20,22 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
 /______/______/______/______/______/______/______/______/______/______/_____ /
 *******************************************************************************
 ''')
-print("Welcome to Treasure Island.")
+import sys
+print("Welcome to the Treasure island!")
 print("Your mission is to find the treasure.")
+direction = input("Do you want to go Left or Right? Press L or R:").lower()
+if direction == "r":
+    print("Sorry wrong direction. End of game")
+    sys.exit()
+else:
+    swim = input("Do you want to swim or wait for the boat? Press S or W:").lower()
+if swim == "s":
+    print("Sorry wrong decision. End of game")
+    sys.exit()
+else:
+    door = input("Do you choose the red yellow or blue door? Press R, Y or B:").lower()
+if door == "r" or door == "B":
+    print("Sorry wrong door. End of game")
+    sys.exit()
+else:
+    print("Super very good, you found the treasure!")
