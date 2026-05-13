@@ -18,7 +18,7 @@ for row in range(10):
     for col in range(10):
         tim.dot(random.choice(colour))
         tim.forward(50)
-    tim.backward(500)  # Go back to start of row
+    tim.backward(500)
     tim.left(90)
     tim.forward(50)
     tim.right(90)

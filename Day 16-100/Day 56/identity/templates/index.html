@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Antonios — Computer Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0ede8;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.06) 39px, rgba(0,0,0,0.06) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.06) 39px, rgba(0,0,0,0.06) 40px);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .id-card {
+      width: 340px;
+      background: #ffffff;
+      border: 0.5px solid rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
+    .id-card-top {
+      background: #1a1a1a;
+      padding: 2rem 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .id-card-top::before {
+      content: 'ID';
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .id-card-top::after {
+      content: '▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-family: 'DM Mono', monospace;
+      font-size: 5px;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.08);
+      overflow: hidden;
+      height: 8px;
+      line-height: 8px;
+    }
+
+    .id-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #2e2e2e;
+      border: 2px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .id-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .id-avatar-fallback {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: rgba(255,255,255,0.5);
+      display: none;
+    }
+
+    .id-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      color: #ffffff;
+      letter-spacing: 0.01em;
+    }
+
+    .id-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: -0.5rem;
+    }
+
+    .id-card-body {
+      padding: 1.5rem 2rem;
+      border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    }
+
+    .id-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+    }
+
+    .id-row:last-child { margin-bottom: 0; }
+
+    .id-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #999;
+    }
+
+    .id-value {
+      font-size: 12px;
+      color: #1a1a1a;
+      letter-spacing: 0.04em;
+    }
+
+    .id-card-footer {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    }
+
+    .id-socials {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .id-social-link {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      text-decoration: none;
+      font-size: 13px;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .id-social-link:hover { color: #ffffff; }
+    .id-social-link.instagram:hover { background: #e1306c; border-color: #e1306c; }
+    .id-social-link.facebook:hover  { background: #1877f2; border-color: #1877f2; }
+    .id-social-link.github:hover    { background: #1a1a1a; border-color: #1a1a1a; }
+
+    .id-serial {
+      font-size: 9px;
+      color: #bbb;
+      letter-spacing: 0.08em;
+    }
+
+    .id-barcode {
+      display: flex;
+      gap: 2px;
+      padding: 0.75rem 2rem;
+      justify-content: center;
+    }
+
+    .id-barcode span {
+      display: inline-block;
+      height: 28px;
+      background: #1a1a1a;
+      opacity: 0.15;
+    }
+
+    .id-copyright {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 11px;
+      color: rgba(0,0,0,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    .id-copyright a {
+      color: rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <div class="id-card">
+      <div class="id-card-top">
+        <div class="id-avatar">
+          <img
+            src="static/images/avatar.jpg"
+            alt="Antonios"
+            onerror="this.style.display='none';document.querySelector('.id-avatar-fallback').style.display='block'"
+          />
+          <span class="id-avatar-fallback">A</span>
+        </div>
+        <h1 class="id-name">Antonios</h1>
+        <p class="id-title">Computer Engineer</p>
+      </div>
+
+      <div class="id-card-body">
+        <div class="id-row">
+          <span class="id-label">Status</span>
+          <span class="id-value">Active</span>
+        </div>
+        <div class="id-row">
+          <span class="id-label">Role</span>
+          <span class="id-value">Computer Engineer</span>
+        </div>
+        <div class="id-row">
+          <span class="id-label">Issued</span>
+          <span class="id-value">2026</span>
+        </div>
+      </div>
+
+      <div class="id-card-footer">
+        <div class="id-socials">
+          <a href="https://github.com/yourusername" class="id-social-link github" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://instagram.com/yourusername" class="id-social-link instagram" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://facebook.com/yourusername" class="id-social-link facebook" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <span class="id-serial">SN-0042-ANT</span>
+      </div>
+
+      <div class="id-barcode" id="barcode"></div>
+    </div>
+
+    <p class="id-copyright">&copy; Antonios &nbsp;·&nbsp; Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a></p>
+  </div>
+
+  <script>
+    const bc = document.getElementById('barcode');
+    const widths = [1,2,1,3,1,2,2,1,1,3,2,1,2,1,3,1,1,2,2,1,3,1,2,1,1,3,1,2,1,2];
+    widths.forEach(w => {
+      const b = document.createElement('span');
+      b.style.width = (w * 2) + 'px';
+      bc.appendChild(b);
+    });
+  </script>
+
+</body>
+</html>
