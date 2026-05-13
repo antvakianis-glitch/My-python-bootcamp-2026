@@ -3,25 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Antonios — Computer Engineer</title>
+  <title>Antonios Vakianis — Computer Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #f0ede8;
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.06) 39px, rgba(0,0,0,0.06) 40px),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.06) 39px, rgba(0,0,0,0.06) 40px);
-      font-family: 'DM Mono', monospace;
-    }
-
     .id-card {
       width: 340px;
       background: #ffffff;
@@ -196,6 +183,15 @@
     .id-copyright a {
       color: rgba(0,0,0,0.4);
     }
+
+    /* Center the card on the page */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'DM Mono', monospace;
+    }
   </style>
 </head>
 <body>
@@ -205,13 +201,13 @@
       <div class="id-card-top">
         <div class="id-avatar">
           <img
-            src="static/images/avatar.jpg"
-            alt="Antonios"
+            src="{{ url_for('static', filename='images/avatar.jpg') }}"
+            alt="Antonios Vakianis"
             onerror="this.style.display='none';document.querySelector('.id-avatar-fallback').style.display='block'"
           />
           <span class="id-avatar-fallback">A</span>
         </div>
-        <h1 class="id-name">Antonios</h1>
+        <h1 class="id-name">Antonios Vakianis</h1>
         <p class="id-title">Computer Engineer</p>
       </div>
 
@@ -232,9 +228,9 @@
 
       <div class="id-card-footer">
         <div class="id-socials">
-          <a href="https://github.com/yourusername" class="id-social-link github" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="https://instagram.com/yourusername" class="id-social-link instagram" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://facebook.com/yourusername" class="id-social-link facebook" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://github.com/antvakianis-glitch" class="id-social-link github" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://instagram.com/ant.vak" class="id-social-link instagram" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://facebook.com/antonis.vakianis" class="id-social-link facebook" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
         </div>
         <span class="id-serial">SN-0042-ANT</span>
       </div>
