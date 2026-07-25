@@ -1,4 +1,8 @@
-.idea/
+..idea/
 venv/
-_pychase_/
+__pycache__/
 *.pyc
+task-info.yaml
+.env
+*.db
+instance/
