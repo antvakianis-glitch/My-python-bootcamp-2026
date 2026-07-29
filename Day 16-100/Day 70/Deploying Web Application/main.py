@@ -15,6 +15,7 @@ import os
 from dotenv import load_dotenv
 import smtplib
 
+
 load_dotenv()
 
 '''
@@ -110,6 +111,10 @@ def admin_only(f):
             return abort(403)
         return f(*args, **kwargs)
     return decorated_function
+
+@app.context_processor
+def inject_year():
+    return dict(year=date.today().year)
 
 # TODO: Use Werkzeug to hash the user's password when creating a new user.
 @app.route('/register', methods=["GET", "POST"])
