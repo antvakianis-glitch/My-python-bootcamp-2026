@@ -11,3 +11,4 @@ SQLAlchemy==2.0.25
 gunicorn
 email-validator
 python-dotenv
+psycopg2-binary
