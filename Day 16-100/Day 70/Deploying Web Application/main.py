@@ -49,7 +49,14 @@ login_manager.init_app(app)
 # CREATE DATABASE
 class Base(DeclarativeBase):
     pass
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI', 'sqlite:///posts.db')
+# Παίρνει το DATABASE_URL από το Render
+db_url = os.environ.get('DATABASE_URL', 'sqlite:///posts.db')
+
+# Διορθώνει τυχόν postgres:// σε postgresql:// για τη συμβατότητα της SQLAlchemy
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
