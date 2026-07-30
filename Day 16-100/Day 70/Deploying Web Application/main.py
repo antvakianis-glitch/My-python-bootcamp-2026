@@ -283,8 +283,9 @@ def contact_page():
     return render_template("contact.html", msg_sent=False)
 def send_email(name, email, phone, message):
     email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
-    with smtplib.SMTP("smtp.gmail.com",port=587) as connection:
-        connection.starttls()
+
+    # Χρήση SSL στην θύρα 465 αντί για 587
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as connection:
         connection.login(MAIL_ADDRESS, MAIL_APP_PW)
         connection.sendmail(MAIL_ADDRESS, MAIL_ADDRESS, email_message)
 
