@@ -14,6 +14,7 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 import os
 from dotenv import load_dotenv
 import smtplib
+import logging
 
 
 load_dotenv()
@@ -287,13 +288,18 @@ def contact_page():
         send_email(data["name"], data["email"], data["phone"], data["message"])
         return render_template("contact.html", msg_sent=True)
     return render_template("contact.html", msg_sent=False)
+
 def send_email(name, email, phone, message):
     email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
 
-    # Χρήση SSL στην θύρα 465 αντί για 587
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as connection:
-        connection.login(MAIL_ADDRESS, MAIL_APP_PW)
-        connection.sendmail(MAIL_ADDRESS, MAIL_ADDRESS, email_message)
+    try:
+        # Ορίζουμε timeout 5 δευτερολέπτων για να μην κολλάει ο server αν μπλοκάρεται η θύρα
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=5) as connection:
+            connection.login(MAIL_ADDRESS, MAIL_APP_PW)
+            connection.sendmail(MAIL_ADDRESS, MAIL_ADDRESS, email_message)
+            print("Email sent successfully!")
+    except Exception as e:
+        print(f"Failed to send email due to network/SMTP restriction: {e}")
 
 
 if __name__ == "__main__":
