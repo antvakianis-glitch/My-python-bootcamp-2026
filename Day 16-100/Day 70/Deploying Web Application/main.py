@@ -15,6 +15,7 @@ import os
 from dotenv import load_dotenv
 import smtplib
 import logging
+import requests
 
 
 load_dotenv()
@@ -290,16 +291,26 @@ def contact_page():
     return render_template("contact.html", msg_sent=False)
 
 def send_email(name, email, phone, message):
-    email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
-
+    api_key = os.environ.get("RESEND_API_KEY")
+    url = "https://api.resend.com/emails"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "from": "onboarding@resend.dev",
+        "to": [MAIL_ADDRESS],  # Στέλνει το email στη δική σου διεύθυνση
+        "subject": "New Message from Blog",
+        "html": f"<p><b>Name:</b> {name}</p><p><b>Email:</b> {email}</p><p><b>Phone:</b> {phone}</p><p><b>Message:</b> {message}</p>"
+    }
     try:
-        # Ορίζουμε timeout 5 δευτερολέπτων για να μην κολλάει ο server αν μπλοκάρεται η θύρα
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=5) as connection:
-            connection.login(MAIL_ADDRESS, MAIL_APP_PW)
-            connection.sendmail(MAIL_ADDRESS, MAIL_ADDRESS, email_message)
-            print("Email sent successfully!")
+        response = requests.post(url, headers=headers, json=data)
+        if response.status_code == 200:
+            print("Email sent successfully via Resend API!")
+        else:
+            print(f"Resend API error: {response.status_code}, {response.text}")
     except Exception as e:
-        print(f"Failed to send email due to network/SMTP restriction: {e}")
+        print(f"Failed to send request: {e}")
 
 
 if __name__ == "__main__":
