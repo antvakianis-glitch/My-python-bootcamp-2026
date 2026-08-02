@@ -31,7 +31,7 @@ def register():
         db.session.commit()
 
         login_user(new_user)
-        return redirect(url_for("main.get_all_posts"))
+        return redirect(url_for("get_all_posts"))
 
     return render_template("register.html", form=form)
 
@@ -52,7 +52,7 @@ def login():
             return redirect(url_for('auth.login'))
         else:
             login_user(user)
-            return redirect(url_for("main.get_all_posts"))
+            return redirect(url_for("get_all_posts"))
 
     return render_template("login.html", form=form)
 
@@ -60,4 +60,4 @@ def login():
 @auth_bp.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('main.get_all_posts'))
+    return redirect(url_for('get_all_posts'))
