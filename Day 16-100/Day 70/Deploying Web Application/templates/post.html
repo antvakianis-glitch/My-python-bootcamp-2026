@@ -30,7 +30,7 @@
         <div class="d-flex justify-content-end mb-4">
 
             <a class="btn btn-primary float-right"
-            href="{{url_for('edit_post', post_id=post.id)}}"
+            href="{{url_for('posts.edit_post', post_id=post.id)}}"
             >Edit Post</a
           >
         </div>
@@ -44,7 +44,7 @@
             {{ ckeditor.config(name='comment_text') }}
             {{ render_form(form) }}
           {% else %}
-            <p>You need to <a href="{{ url_for('login') }}">login</a> to leave a comment.</p>
+            <p>You need to <a href="{{ url_for('auth.login') }}">login</a> to leave a comment.</p>
           {% endif %}
 
           <ul class="commentList">
