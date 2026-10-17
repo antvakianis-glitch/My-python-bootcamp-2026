@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Antonis | Python Web Developer{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="p-5 mb-5 bg-light rounded-3 text-center shadow-sm">
+    <div class="container-fluid py-3">
+        <h1 class="display-4 fw-bold">Hi, I'm Antonios</h1>
+        <p class="fs-4 text-muted mb-2">Python Web Developer</p>
+        <p class="col-md-8 fs-5 mx-auto text-muted">
+            I build Flask web apps with user authentication, SQLAlchemy databases, and clean Bootstrap interfaces.
+        </p>
+        <a href="#projects" class="btn btn-primary btn-lg mt-3 me-2">View My Projects</a>
+        <a href="#contact" class="btn btn-outline-dark btn-lg mt-3">Contact Me</a>
+    </div>
+</div>
+
+<!-- About Section -->
+<section id="about" class="my-5 p-4 bg-light rounded-3 shadow-sm">
+    <h2 class="fw-bold mb-3">About Me</h2>
+    <p class="fs-5 text-body">
+        Hi, I'm Antonios! I specialize in Python web development, Flask applications,
+        SQLAlchemy databases, and building dynamic websites.
+    </p>
+    <div class="d-flex flex-wrap gap-2">
+        {% for skill in ["Python", "Flask", "SQLAlchemy", "SQLite", "WTForms", "Bootstrap 5", "Git & GitHub"] %}
+            <span class="badge bg-secondary fs-6 fw-normal">{{ skill }}</span>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="my-5">
+    <h2 class="mb-4 fw-bold text-center">Featured Projects</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for project in projects %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ url_for('static', filename='images/' + project.image) }}"
+                         class="card-img-top" alt="{{ project.title }}"
+                         style="height: 200px; object-fit: cover;">
+
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ project.title }}</h5>
+                        <p class="card-text text-secondary">{{ project.description }}</p>
+                    </div>
+
+                    <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-end gap-2 mb-2">
+                        <div class="d-flex flex-wrap gap-1">
+                            {% for tech in project.technologies %}
+                                <span class="badge bg-secondary">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="d-flex gap-2 flex-shrink-0">
+                            {% if project.live_url %}
+                                <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="btn btn-dark btn-sm">Live Demo</a>
+                            {% endif %}
+                            {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm">View Code</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="my-5 p-4 bg-light rounded-3 shadow-sm text-center">
+    <h2 class="fw-bold mb-3">Get In Touch</h2>
+    <p class="text-body">I'm open to junior Python / Flask opportunities and collaborations.</p>
+
+    <a href="mailto:pythontony6@gmail.com" class="btn btn-primary me-2">Email Me</a>
+    <a href="https://github.com/antvakianis-glitch" target="_blank" rel="noopener" class="btn btn-outline-dark">GitHub</a>
+
+    <p class="text-muted mt-3 mb-0">or write to me at pythontony6@gmail.com</p>
+</section>
+
+{% endblock %}
