@@ -1,4 +1,4 @@
-..idea/
+.idea/
 venv/
 __pycache__/
 *.pyc
@@ -6,3 +6,5 @@ task-info.yaml
 .env
 *.db
 instance/
+.DS_Store
+chrome_profile/
